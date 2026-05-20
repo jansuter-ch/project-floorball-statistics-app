@@ -43,9 +43,17 @@ The Floorball Statistics project displays key information about the Swiss floorb
 
 Three use case diagrams cover the main views of the system:
 
-- Use Case 100: Home page actions for users and admins
-- Use Case 200: Player stats page actions
-- Use Case 300: League rankings page actions
+**Use Case 100: Home page**
+
+![UC-100](UC-100.jpg)
+
+**Use Case 200: Player stats page**
+
+![UC-200](UC-200.jpg)
+
+**Use Case 300: League rankings page**
+
+![UC-300](UC-300.jpg)
 
 ---
 
@@ -55,6 +63,8 @@ Three use case diagrams cover the main views of the system:
 
 The wireframe defines the structure and layout of the three main views: Home, Player Stats, and League Rankings. Each view outlines the major UI elements including filters, search bar, data tables, and navigation bar.
 
+![Wireframe](Wireframe.png)
+
 ### Domain Design
 
 The domain model is implemented using JPA entities in the package `ch.fhnw.pizza.data.domain`.
@@ -62,6 +72,8 @@ The domain model is implemented using JPA entities in the package `ch.fhnw.pizza
 Core entities: Player, Team, League, Ranking.
 
 Note: The Ranking entity was removed during development as Budibase handles sorting and ranking automatically based on total points.
+
+![Domain Design](Domain%20Design.png)
 
 ### Business Logic
 
