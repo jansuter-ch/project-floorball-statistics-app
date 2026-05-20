@@ -173,7 +173,7 @@ The Budibase app export (`db.txt`) is included in this repository and can be imp
 1. Open this repository in a GitHub Codespace (Code > Codespaces > Create codespace on main)
 2. In the terminal, navigate to the pizza folder: `cd pizza`
 3. Run the application: `./mvnw spring-boot:run`
-4. Wait for "Started PizzaApplication" in the terminal
+4. The application is ready when a button appears in the Codespace notification area that opens a new browser tab showing the text `Wela Wela!`
 5. Go to the Ports tab, find port 8080, right-click and set visibility to Public
 6. Copy the public URL (format: `https://[codespace-name]-8080.app.github.dev`)
 
@@ -183,22 +183,27 @@ The full frontend is included in this repository as `db.txt`. Import it to resto
 
 1. Log into your Budibase account
 2. On the home portal, create a new workspace
-3. Inside the workspace, go to Settings
-4. Under General, click "Import workspace"
-5. Upload the `db.txt` file from the root of this repository
-6. The app appears in the workspace automatically with all screens and datasource configuration in place
+3. Inside the workspace, create a new app
+4. Inside the app, go to Connections in the left sidebar
+5. Click General
+6. Click "Import workspace"
+7. Upload the `db.txt` file from the root of this repository
+8. The app appears in the workspace automatically with all screens and datasource configuration in place
 
 Note: The folder `Brugg_4_Floorball_Statistics-export-1749570509041` in this repository is an alternative Budibase export in folder format. Use `db.txt` for the import as it is the standard single-file format.
 
 ### Step 3: Connect Budibase to the Backend
 
-1. Inside the imported app, go to Data > API Explorer
-2. Select the Webservice-FloorballStatistics datasource from the left panel
-3. Click "Edit connection + auth"
-4. Update the Base URL to the public Codespace URL copied in Step 1 (no trailing slash)
-5. Save and test the following queries to confirm 200 responses:
-   - 02 - List all Players
+1. Inside the app, go to Connections in the left sidebar
+2. Click APIs
+3. In the left panel, find and select the datasource named Webservice-FloorballStatistics (not "Used for reference")
+4. Click "Edit connection + auth"
+5. Update the Base URL to the public Codespace URL copied in Step 1, including everything up to and including `.dev` with no trailing slash
+6. Save the connection
+7. Go to API Explorer in the left sidebar
+8. Under Webservice-FloorballStatistics, test the following queries and confirm each returns status 200 in green:
    - 01 - List all Teams
+   - 02 - List all Players
    - 03 - Login
 
 Important: the Codespace URL changes every time a new Codespace is created. Repeat Step 3 whenever you restart with a new Codespace.
@@ -206,8 +211,29 @@ Important: the Codespace URL changes every time a new Codespace is created. Repe
 ### Step 4: Publish and Open the App
 
 1. Click Publish in the top right of Budibase
-2. Open the published app via the portal or the link icon next to Publish
-3. To test admin access, log in with Username `myadmin` and Password `1234567`
+2. Go back to the Budibase home portal
+3. Click on the app
+4. In the top right, click "Set live"
+5. In the top left, click "View live app" to open the published app in a new tab
+6. Test the public screens: Home, Player Stats, and League Rankings
+7. To test admin access, navigate to the login screen and sign in with Username `myadmin` and Password `1234567`
+
+### Troubleshooting
+
+**The backend does not start or the terminal shows an error**
+Make sure you are inside the pizza folder before running the command. Run `cd pizza` first, then `./mvnw spring-boot:run`. If the command is not found, try `mvn spring-boot:run` instead.
+
+**Port 8080 does not appear in the Ports tab**
+The application may still be starting. Wait until the `Wela Wela!` button appears in the Codespace notification area, then check the Ports tab again.
+
+**Queries return status 404 or fail to connect**
+The Base URL in the datasource is pointing to an old or inactive Codespace. Go back to Step 3 and update the Base URL to the current Codespace URL. Make sure the URL does not have a trailing slash and ends exactly at `.dev`.
+
+**The app shows no data after publishing**
+The backend Codespace may have gone to sleep. Return to the Codespace, check the terminal is still running, and if not run `./mvnw spring-boot:run` again. Then update the Base URL in Budibase if the Codespace URL has changed.
+
+**Login fails on the admin screen**
+Use exactly Username `myadmin` and Password `1234567`. The H2 database resets on every backend restart, so the admin credentials are re-seeded automatically each time the backend starts.
 
 ---
 
