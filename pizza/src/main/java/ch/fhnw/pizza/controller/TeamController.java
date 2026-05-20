@@ -40,6 +40,6 @@ public class TeamController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteTeam(@PathVariable Long id) {
         teamService.deleteTeam(id);
-        return ResponseEntity.ok(java.util.Collections.singletonMap("deletedId", id));
+        return ResponseEntity.ok(java.util.Collections.singletonMap("deleted Team with ID:", id));
     }
 }
